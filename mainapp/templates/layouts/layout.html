@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title  %}
+        {% endblock %}
+        - Jeremias Barolo
+        
+    </title>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles1.css' %}"/>
+</head>
+
+<body>
+
+    <!-- cabecera -->
+    <header>
+        <div id="logotipo">
+            <!-- logo django -->
+            <h1>Proyecto con Django</h1>
+            <img src=" {% static 'images/logo.png' %}" />
+        </div>
+        
+    </header>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'Inicio' %}"> Inicio</a>
+            </li>
+            <li>
+
+                <a href="{% url 'list_articles' %}"> Categorias</a>
+                <ul>
+                
+                    {%for category in categories%}
+                        <li>
+                            <a href="{% url 'category' category.0 %}"> {{category.1}}</a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+                
+            </li>
+            
+            {%for page in pages%}
+                <li>
+                    <a href="{% url 'pagina' page.2 %}"> {{page.1}} </a>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+
+    </nav>
+
+
+    <div id="barra1">
+        <span class="esquina-izquierda"></span>
+        <span class="relleno-barra"></span>
+        <span class="esquina-derecha"></span>
+    </div>
+
+
+    <div id="content">
+        <div class="box">
+            {% block content %}
+            <!-- Codigo que viene de templates -->
+            <strong>contenido del bloque original!!!!</strong>
+            {% endblock %}
+        </div>
+        
+        
+    </div>
+
+
+    <footer>
+        Pagina Creada por Jeremias Barolo - {%now "d/m/y "%}
+    </footer>
+</body>
+
+</html>
